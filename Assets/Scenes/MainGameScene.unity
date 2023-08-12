@@ -539,6 +539,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   diceRoll_Btn: {fileID: 1562951276}
+  gameManager: {fileID: 853540648}
 --- !u!114 &363281317
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1017,6 +1018,63 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c01ce770285f54c4bab5535ac78bcdef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &853540647
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 853540649}
+  - component: {fileID: 853540648}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &853540648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 853540647}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b951abcbca200c49a0f49bdc9756d53, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PawnA: {fileID: 1624827413}
+  PawnB: {fileID: 1119862288}
+  PawnA_PlaysFirst: 1
+--- !u!4 &853540649
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 853540647}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.56958467, y: 0.37356478, z: -3.8783846}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1119862288 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8854925210872143216, guid: 6e5762137fef41843896ed6b84b34afb, type: 3}
+  m_PrefabInstance: {fileID: 1782956031}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8801a0baa2d3e9d488e80033ae026b60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1137141701
 GameObject:
   m_ObjectHideFlags: 0
@@ -1450,6 +1508,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1562951274}
   m_CullTransparentMesh: 1
+--- !u!114 &1624827413 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7199500729323054717, guid: 7ae3142e9432ec941894af032fd1508b, type: 3}
+  m_PrefabInstance: {fileID: 21554519}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8801a0baa2d3e9d488e80033ae026b60, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1664267312
 PrefabInstance:
   m_ObjectHideFlags: 0

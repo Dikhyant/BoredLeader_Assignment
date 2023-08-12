@@ -5,12 +5,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    private static GameManager instance;
-    public static GameManager Instance {
-        get {
-            return instance;
-        }
-    }
+
 
     [SerializeField]
     private Pawn PawnA;
@@ -19,31 +14,23 @@ public class GameManager : MonoBehaviour
     private Pawn PawnB;
 
     private Pawn currentPawnToPlay = null;
+    public bool PawnA_PlaysFirst;
 
-    void Awake()
-    {
-        if(instance == null) {
-            instance = this;
+    void Awake() {
+        if(PawnA == null) {
+            Debug.LogError("PawnA not found");
         }
-        else if(instance != this) {
-            Destroy(this);
+        if(PawnB == null) {
+            Debug.LogError("PawnB not found");
         }
 
-        if(PawnA != null && PawnB != null) {
+        if(PawnA != null && PawnB != null && PawnA_PlaysFirst) {
             currentPawnToPlay = PawnA;
         }
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
-    public static void CreateGameManager() {
-        GameObject gameObject = Instantiate((new GameObject()));
-        gameObject.AddComponent<GameManager>();
-        gameObject.name = "GameManager";
+        if(PawnA != null && PawnB != null && !PawnA_PlaysFirst) {
+            currentPawnToPlay = PawnB;
+        }
     }
 
     public async Task RollDice() {

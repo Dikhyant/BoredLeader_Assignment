@@ -8,23 +8,32 @@ public class MainGameUIController : MonoBehaviour
 {
     [SerializeField]
     private Button diceRoll_Btn;
+
+    [SerializeField]
+    private GameManager gameManager;
     void OnEnable() {
-        GameManager.Instance.onDiceNumberGenerated_Event += HandleDiceNumberGenerated;
+        if(gameManager) {
+            gameManager.onDiceNumberGenerated_Event += HandleDiceNumberGenerated;
+        }
+        
         if(diceRoll_Btn) {
             diceRoll_Btn.onClick.AddListener(RollDice);
         }
     }
 
     void OnDisable() {
-        GameManager.Instance.onDiceNumberGenerated_Event -= HandleDiceNumberGenerated;
+        if(gameManager) {
+            gameManager.onDiceNumberGenerated_Event -= HandleDiceNumberGenerated;
+        }
+        
         if(diceRoll_Btn) {
             diceRoll_Btn.onClick.RemoveAllListeners();
         }
     }
 
     void Awake() {
-        if(GameManager.Instance == null) {
-            GameManager.CreateGameManager();
+        if(gameManager == null) {
+            Debug.LogError("Game Manager not found");
         }
     }
 
@@ -33,8 +42,9 @@ public class MainGameUIController : MonoBehaviour
     }
 
     public async void RollDice() {
+        if(gameManager == null) return;
         diceRoll_Btn.interactable = false;
-        await GameManager.Instance.RollDice();
+        await gameManager.RollDice();
         diceRoll_Btn.interactable = true;
     }
 }
