@@ -39,6 +39,7 @@
      <Compile Include="Assets\Scripts\Pawn.cs" />
      <Compile Include="Assets\Scripts\Cell.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
+     <Compile Include="Assets\Scripts\UI\MainGameUIController.cs" />
     <Reference Include="UnityEngine">
         <HintPath>D:\Unity_Engines\2020.3.46f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>
