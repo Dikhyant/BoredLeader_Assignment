@@ -23,6 +23,22 @@ public class Pawn : MonoBehaviour
 
     private PawnFacingDirection currentFacingDirection;
 
+    public enum PowerType {
+        BACKWARD,
+        IMPRISON,
+        NONE
+    }
+
+    public PowerType powerUsed;
+    public bool isImprisioned = false;
+    public bool willGoBackwards = false;
+    public int numberOfRoundsImprisionedFor = 0;
+    public static int maxNumberOfRoundsToBeImprisioned = 2;
+
+    void Awake() {
+        powerUsed = PowerType.NONE;
+    }
+
     void Start()
     {
         FigureOutInitialFacingDirection();
