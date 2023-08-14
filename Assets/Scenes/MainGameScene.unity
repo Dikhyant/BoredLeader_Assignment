@@ -427,6 +427,52 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2842479050311843606, guid: 424cd8e07c139d54aae4ff089323a1b5, type: 3}
   m_PrefabInstance: {fileID: 223774167}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &312983274
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 312983276}
+  - component: {fileID: 312983275}
+  m_Layer: 0
+  m_Name: PrisonAnimator
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &312983275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 312983274}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d875578b4668624b8a073ca13e44386, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  prisonPrefab: {fileID: 6672689415272384554, guid: ffe78123f49ccbc48bf6ae5cfb791c35, type: 3}
+  appearingOffset: {x: 0, y: 2, z: 0}
+  removalOffset: {x: 0, y: 2, z: 0}
+--- !u!4 &312983276
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 312983274}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.7473295, y: -0.4102049, z: -0.5273839}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &363281315
 GameObject:
   m_ObjectHideFlags: 0
@@ -1183,6 +1229,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PawnA: {fileID: 1624827413}
   PawnB: {fileID: 1119862288}
+  prisonAnimator: {fileID: 312983275}
   PawnA_PlaysFirst: 1
 --- !u!4 &853540649
 Transform:
@@ -1922,9 +1969,9 @@ RectTransform:
   m_Father: {fileID: 363281320}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 255, y: -136.52}
+  m_AnchorMin: {x: 1, y: 0}
+  m_AnchorMax: {x: 1, y: 0}
+  m_AnchoredPosition: {x: -145, y: 78.188}
   m_SizeDelta: {x: 90, y: 118}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1697459614

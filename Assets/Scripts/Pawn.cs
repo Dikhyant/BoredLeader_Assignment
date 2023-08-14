@@ -15,6 +15,14 @@ public class Pawn : MonoBehaviour
     [SerializeField]
     private Cell currentCell;
 
+    public Cell CurrentCell {
+        get {
+            return currentCell;
+        }
+    }
+
+    private Cell initialCell;
+
     public Vector3 positionOffset;
     private enum PawnFacingDirection {
         DirectionA,
@@ -37,6 +45,9 @@ public class Pawn : MonoBehaviour
 
     void Awake() {
         powerUsed = PowerType.NONE;
+        if(currentCell) {
+            initialCell = currentCell;
+        }
     }
 
     void Start()
@@ -69,6 +80,12 @@ public class Pawn : MonoBehaviour
 
         await Task.Delay(1000);
         await MoveForward_By_Steps(2);
+    }
+
+    public async Task ResetToInitialCell() {
+        await MoveTo_Coroutine(initialCell.transform.position + positionOffset, initialCell.transform.rotation);
+        currentCell = initialCell;
+        FigureOutInitialFacingDirection();
     }
 
     public async Task MoveForward_By_Steps(int steps) {

@@ -12,6 +12,9 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]
     private Pawn PawnB;
+    
+    [SerializeField]
+    private PrisonAnimator prisonAnimator;
 
     private Pawn currentPawnToPlay = null;
     public bool PawnA_PlaysFirst;
@@ -33,6 +36,10 @@ public class GameManager : MonoBehaviour
         if(PawnA != null && PawnB != null && !PawnA_PlaysFirst) {
             currentPawnToPlay = PawnB;
         }
+
+        if(prisonAnimator == null) {
+            Debug.LogError("Prison animator not found");
+        }
     }
 
     public async Task RollDice() {
@@ -40,7 +47,8 @@ public class GameManager : MonoBehaviour
         int diceNumber = await GenerateNumberForDice();
         onDiceNumberGenerated_Event?.Invoke(diceNumber);
         await MoveCurrentPawnBySteps(diceNumber);
-        CheckForImprisonment();
+        await CheckIfPawnSteppedOnOpponentPawn();
+        ChooseNextPlayer();
     }
 
     public async Task<int> GenerateNumberForDice() {
@@ -79,7 +87,19 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void CheckForImprisonment() {
+    private async Task CheckIfPawnSteppedOnOpponentPawn() {
+        if(currentPawnToPlay == PawnA && PawnA.CurrentCell == PawnB.CurrentCell) {
+            await PawnB.ResetToInitialCell();
+            return;
+        }
+
+        if(currentPawnToPlay == PawnB && PawnA.CurrentCell == PawnB.CurrentCell) {
+            await PawnA.ResetToInitialCell();
+            return;
+        }
+    }
+
+    public void ChooseNextPlayer() {
         if(PawnB.isImprisioned && 
            PawnB.numberOfRoundsImprisionedFor < Pawn.maxNumberOfRoundsToBeImprisioned &&
            currentPawnToPlay == PawnA) {
@@ -96,6 +116,9 @@ public class GameManager : MonoBehaviour
             PawnB.numberOfRoundsImprisionedFor = 0;
             PawnB.isImprisioned = false;
             currentPawnToPlay = PawnB;
+            if(prisonAnimator) {
+                prisonAnimator.RemovePrison();
+            }
             return;
         }
 
@@ -115,6 +138,9 @@ public class GameManager : MonoBehaviour
             PawnA.numberOfRoundsImprisionedFor = 0;
             PawnA.isImprisioned = false;
             currentPawnToPlay = PawnA;
+            if(prisonAnimator) {
+                prisonAnimator.RemovePrison();
+            }
             return;
         }
 
@@ -141,18 +167,47 @@ public class GameManager : MonoBehaviour
         }
 
         if(powerType == Pawn.PowerType.BACKWARD && 
+        currentPawnToPlay == PawnA && 
+        PawnB.numberOfRoundsImprisionedFor < Pawn.maxNumberOfRoundsToBeImprisioned && PawnB.isImprisioned) {
+            // backward powered cannot be used;
+            return;
+        }
+
+        if(powerType == Pawn.PowerType.BACKWARD && 
         currentPawnToPlay == PawnB && 
         PawnA.numberOfRoundsImprisionedFor == Pawn.maxNumberOfRoundsToBeImprisioned && PawnA.isImprisioned) {
             PawnB.powerUsed = powerType;
             return;
         }
 
-        if(currentPawnToPlay == PawnA) {
+        if(powerType == Pawn.PowerType.BACKWARD && 
+        currentPawnToPlay == PawnB && 
+        PawnA.numberOfRoundsImprisionedFor < Pawn.maxNumberOfRoundsToBeImprisioned && PawnA.isImprisioned) {
+            return;
+        }
+
+        if(currentPawnToPlay == PawnA && powerType == Pawn.PowerType.IMPRISON) {
+            PawnA.powerUsed = powerType;
+            if(prisonAnimator) {
+                prisonAnimator.SpawnPrisonAt(PawnB.transform.position);
+            }
+            return;
+        }
+
+        if(currentPawnToPlay == PawnB && powerType == Pawn.PowerType.IMPRISON) {
+            PawnB.powerUsed = powerType;
+            if(prisonAnimator) {
+                prisonAnimator.SpawnPrisonAt(PawnA.transform.position);
+            }
+            return;
+        }
+
+        if(currentPawnToPlay == PawnA && powerType == Pawn.PowerType.BACKWARD) {
             PawnA.powerUsed = powerType;
             return;
         }
         
-        if(currentPawnToPlay == PawnB) {
+        if(currentPawnToPlay == PawnB && powerType == Pawn.PowerType.BACKWARD) {
             PawnB.powerUsed = powerType;
             return;
         }

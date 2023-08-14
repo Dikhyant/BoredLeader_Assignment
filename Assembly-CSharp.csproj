@@ -38,8 +38,9 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\Pawn.cs" />
      <Compile Include="Assets\Scripts\Cell.cs" />
-     <Compile Include="Assets\Scripts\GameManager.cs" />
      <Compile Include="Assets\Scripts\UI\MainGameUIController.cs" />
+     <Compile Include="Assets\Scripts\GameManager.cs" />
+     <Compile Include="Assets\Scripts\PrisonAnimator.cs" />
     <Reference Include="UnityEngine">
         <HintPath>D:\Unity_Engines\2020.3.46f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>
@@ -627,6 +628,9 @@
     </Reference>
     <Reference Include="Unity.TextMeshPro">
         <HintPath>D:\Unity_Projects\BoredLeader_Assignment\Library\ScriptAssemblies\Unity.TextMeshPro.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.Sprite.Editor">
+        <HintPath>D:\Unity_Projects\BoredLeader_Assignment\Library\ScriptAssemblies\Unity.2D.Sprite.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
         <HintPath>D:\Unity_Projects\BoredLeader_Assignment\Library\ScriptAssemblies\UnityEditor.UI.dll</HintPath>
