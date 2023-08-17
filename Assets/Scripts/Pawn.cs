@@ -19,17 +19,35 @@ public class Pawn : MonoBehaviour
         get {
             return currentCell;
         }
+
+        set {
+            currentCell = value;
+        }
+    }
+
+    private static Pawn currentPawn;
+
+    public static Pawn CurrentPawn {
+        get {
+            return currentPawn;
+        }
     }
 
     private Cell initialCell;
 
     public Vector3 positionOffset;
-    private enum PawnFacingDirection {
+    public enum PawnFacingDirection {
         DirectionA,
         DirectionB
     }
 
     private PawnFacingDirection currentFacingDirection;
+
+    public PawnFacingDirection CurrentFacingDirection {
+        get {
+            return currentFacingDirection;
+        }
+    }
 
     public enum PowerType {
         BACKWARD,

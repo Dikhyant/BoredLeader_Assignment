@@ -27,6 +27,12 @@ public class MainGameUIController : MonoBehaviour
 
     private bool keepAnimationDiceRoll = false;
 
+    [SerializeField]
+    private BackwardCard backwardCard;
+
+    [SerializeField]
+    private ImprisonCard imprisonCard;
+
     void OnEnable() {
         if(gameManager) {
             gameManager.onDiceNumberGenerated_Event += HandleDiceNumberGenerated;
@@ -92,6 +98,8 @@ public class MainGameUIController : MonoBehaviour
     }
 
     public async void RollDice() {
+        CustomEvents.DispatchOnDiceClicked();
+
         if(gameManager == null) return;
         diceRoll_Btn.interactable = false;
         backwardPower_Btn.interactable = false;
@@ -124,12 +132,16 @@ public class MainGameUIController : MonoBehaviour
     }
 
     public void OnBackwardPowerClicked() {
-        gameManager.PowerUsed(Pawn.PowerType.BACKWARD);
-        backwardPower_Btn.interactable = false;
+        if(backwardCard == null) return;
+        CustomEvents.DispatchOnCardClicked(ScriptableObject.Instantiate(backwardCard));
+        // gameManager.PowerUsed(Pawn.PowerType.BACKWARD);
+        // backwardPower_Btn.interactable = false;
     }
 
     public void OnImprisionPowerClicked() {
-        gameManager.PowerUsed(Pawn.PowerType.IMPRISON);
-        imprisionPower_Btn.interactable = false;
+        if(imprisonCard == null) return;
+        CustomEvents.DispatchOnCardClicked(ScriptableObject.Instantiate(imprisonCard));
+        // gameManager.PowerUsed(Pawn.PowerType.IMPRISON);
+        // imprisionPower_Btn.interactable = false;
     }
 }

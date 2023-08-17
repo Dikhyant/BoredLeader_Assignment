@@ -19,7 +19,16 @@ public class GameManager : MonoBehaviour
     private Pawn currentPawnToPlay = null;
     public bool PawnA_PlaysFirst;
 
-    
+    private ICardActuator cardActuator;
+    private IPawnMover pawnMover;
+
+    void OnEnable() {
+        CustomEvents.OnCardClicked += HandleOnCardClicked;
+    }
+
+    void OnDisable() {
+        CustomEvents.OnCardClicked -= HandleOnCardClicked;
+    }
 
     void Awake() {
         if(PawnA == null) {
@@ -40,14 +49,24 @@ public class GameManager : MonoBehaviour
         if(prisonAnimator == null) {
             Debug.LogError("Prison animator not found");
         }
+
+        
+        pawnMover = PawnMoverProvider.Instance.GetPawnMover();
+    }
+
+    private void HandleOnCardClicked(ICard card) {
+        if(cardActuator == null) return;
+        cardActuator.UseCard(card);
     }
 
     public async Task RollDice() {
+        if(pawnMover == null) return;
         ApplyPowerEffect();
         int diceNumber = await GenerateNumberForDice();
         onDiceNumberGenerated_Event?.Invoke(diceNumber);
-        await MoveCurrentPawnBySteps(diceNumber);
-        await CheckIfPawnSteppedOnOpponentPawn();
+        await pawnMover.MovePawnBySteps(Pawn.CurrentPawn, diceNumber);
+        // await MoveCurrentPawnBySteps(diceNumber);
+        // await CheckIfPawnSteppedOnOpponentPawn();
         ChooseNextPlayer();
     }
 
