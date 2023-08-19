@@ -12,3 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6132af561fad36e41857c63020aa5ff9, type: 3}
   m_Name: ImprisonCard
   m_EditorClassIdentifier: 
+  maxNumberOfRoundsToBeImprisioned: 2

@@ -36,19 +36,26 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\Pawn.cs" />
+     <Compile Include="Assets\Scripts\Pawn\Pawn.cs" />
+     <Compile Include="Assets\Scripts\Pawn\PawnMover.cs" />
+     <Compile Include="Assets\Scripts\Pawn\PawnMoverProvider.cs" />
+     <Compile Include="Assets\Scripts\Dice.cs" />
+     <Compile Include="Assets\Scripts\Pawn\PawnManager.cs" />
      <Compile Include="Assets\Scripts\Cell.cs" />
-     <Compile Include="Assets\Scripts\UI\MainGameUIController.cs" />
+     <Compile Include="Assets\Scripts\CustomEvents.cs" />
+     <Compile Include="Assets\Scripts\Cards\ImprisonPowerModel.cs" />
+     <Compile Include="Assets\Scripts\Cards\CardActuator.cs" />
+     <Compile Include="Assets\Scripts\Cards\BackwardPowerModel.cs" />
+     <Compile Include="Assets\Scripts\Cards\CardCommands.cs" />
+     <Compile Include="Assets\Scripts\PathManager.cs" />
+     <Compile Include="Assets\Scripts\UI\MainGameUIView.cs" />
+     <Compile Include="Assets\Scripts\Path.cs" />
+     <Compile Include="Assets\Scripts\Interfaces.cs" />
      <Compile Include="Assets\Scripts\PrisonAnimator.cs" />
      <Compile Include="Assets\Scripts\GameManager.cs" />
-     <Compile Include="Assets\Scripts\CustomEvents.cs" />
-     <Compile Include="Assets\Scripts\Interfaces.cs" />
-     <Compile Include="Assets\Scripts\Cards\BackwardCard.cs" />
-     <Compile Include="Assets\Scripts\Cards\ImprisonCard.cs" />
-     <Compile Include="Assets\Scripts\Path.cs" />
-     <Compile Include="Assets\Scripts\PathManager.cs" />
-     <Compile Include="Assets\Scripts\PawnMover.cs" />
-     <Compile Include="Assets\Scripts\PawnMoverProvider.cs" />
+     <Compile Include="Assets\Scripts\DiceManager.cs" />
+     <Compile Include="Assets\Scripts\Cards\PowerModel.cs" />
+     <Compile Include="Assets\Scripts\PrisonStateHandler.cs" />
     <Reference Include="UnityEngine">
         <HintPath>D:\Unity_Engines\2020.3.46f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>

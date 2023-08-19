@@ -8,29 +8,44 @@ public class PrisonAnimator : MonoBehaviour
     [SerializeField]
     private GameObject prisonPrefab;
 
-    private GameObject prisonGameObject;
-
     public Vector3 appearingOffset;
 
     public Vector3 removalOffset;
+
+    private Dictionary<Pawn, GameObject> prisonGameObjects;
+
+    void OnEnable() {
+        CustomEvents.OnPawnImprisoned += SpawnPrisonAt;
+        CustomEvents.OnPawnFreedFromPrison += RemovePrison;
+    }
+
+    void OnDisable() {
+        CustomEvents.OnPawnImprisoned -= SpawnPrisonAt;
+        CustomEvents.OnPawnFreedFromPrison -= RemovePrison;
+    }
 
     void Awake() {
         if(prisonPrefab == null) {
             Debug.LogError("Prison Prefab not found");
         }
+
+        prisonGameObjects = new Dictionary<Pawn, GameObject>();
     }
 
-    public void SpawnPrisonAt(Vector3 location) {
-        CreatePrisonGameObject(location);
-        AnimatePrisonSpawn(location);
+    private void SpawnPrisonAt(Pawn pawn) {
+        if(prisonGameObjects.ContainsKey(pawn)) return;
+
+        Vector3 location = pawn.transform.position;
+        prisonGameObjects.Add(pawn, CreatePrisonGameObject(location));
+        AnimatePrisonSpawn(prisonGameObjects[pawn], location);
     }
 
-    private void CreatePrisonGameObject(Vector3 location) {
-        if(prisonPrefab == null) return;
-        prisonGameObject = Instantiate(prisonPrefab, location, Quaternion.identity);
+    private GameObject CreatePrisonGameObject(Vector3 location) {
+        if(prisonPrefab == null) return null;
+        return Instantiate(prisonPrefab, location, Quaternion.identity);
     }
 
-    private async void AnimatePrisonSpawn(Vector3 finalLocation) {
+    private async void AnimatePrisonSpawn(GameObject prisonGameObject, Vector3 finalLocation) {
         if(prisonGameObject == null) return;
 
         Vector3 initialLocation = finalLocation + appearingOffset;
@@ -47,11 +62,12 @@ public class PrisonAnimator : MonoBehaviour
         }
     }
 
-    public void RemovePrison() {
-        AnimatePrisonRemoval();
+    private void RemovePrison(Pawn pawn) {
+        if(!prisonGameObjects.ContainsKey(pawn)) return;
+        AnimatePrisonRemoval(prisonGameObjects[pawn]);
     }
 
-    private async void AnimatePrisonRemoval() {
+    private async void AnimatePrisonRemoval(GameObject prisonGameObject) {
         if(prisonGameObject == null) return;
 
         Vector3 initialLocation = new Vector3(
